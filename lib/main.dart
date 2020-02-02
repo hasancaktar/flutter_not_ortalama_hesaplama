@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -7,9 +8,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
       ),
       home: MyHomePage(),
     );
@@ -42,15 +44,25 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.info,),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => hakkinda()));
+              })
+        ],
         title: Text("Ortalama Hesaplama"),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (fromKey.currentState.validate()) {
-            fromKey.currentState.save();
-          }
-        },
-        child: Icon(Icons.add),
+      floatingActionButton: Container(width: 100,height: 100,margin: EdgeInsets.only(bottom: 30,right: 20),
+        child: FloatingActionButton(
+          onPressed: () {
+            if (fromKey.currentState.validate()) {
+              fromKey.currentState.save();
+            }
+          },
+          child: Icon(Icons.add,size: 50,),
+        ),
       ),
       body: OrientationBuilder(builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
@@ -64,6 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget uygulamaGovdesi() {
     return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/d.jpg"), fit: BoxFit.cover)),
       //  margin: EdgeInsets.all(10),
       //   padding: EdgeInsets.all(10),
       child: Column(
@@ -80,10 +95,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Colors.brown, width: 2)),
+                                BorderSide(color: Colors.brown, width: 3)),
                         focusedBorder: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Colors.brown, width: 2)),
+                                BorderSide(color: Colors.brown, width: 3)),
                         border: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
@@ -293,8 +308,9 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Container(
         margin: EdgeInsets.all(4),
         decoration: BoxDecoration(
+            color: Colors.orange.shade200,
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: tumDersler[index].renk, width: 2)),
+            border: Border.all(color: tumDersler[index].renk, width: 4)),
         child: ListTile(
           trailing: Icon(
             Icons.arrow_right,
@@ -305,10 +321,16 @@ class _MyHomePageState extends State<MyHomePage> {
             Icons.school,
             color: tumDersler[index].renk,
           ),
-          title: Text(tumDersler[index].ad),
-          subtitle: Text(tumDersler[index].kredi.toString() +
-              " kredi Ders Not Değeri" +
-              tumDersler[index].harfDegeri.toString()),
+          title: Text(tumDersler[index].ad,
+              style: TextStyle(
+                fontSize: 22,
+              )),
+          subtitle: Text(
+            tumDersler[index].kredi.toString() +
+                " kredi. Ders Not Değeri: " +
+                tumDersler[index].harfDegeri.toString(),
+            style: TextStyle(fontSize: 20),
+          ),
         ),
       ),
     );
@@ -350,10 +372,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Colors.brown, width: 2)),
+                                      color: Colors.brown, width: 3)),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Colors.brown, width: 2)),
+                                      color: Colors.brown, width: 3)),
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10))),
@@ -476,6 +498,67 @@ class _MyHomePageState extends State<MyHomePage> {
           )),
         ],
       ),
+    );
+  }
+
+  Widget hakkinda() {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Hakkında"),
+      ),
+      body: Column(children: <Widget>[
+        Container(margin: EdgeInsets.symmetric(horizontal: 10,vertical: 90), padding: EdgeInsets.symmetric(vertical: 50,horizontal: 20),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.pink, width: 5),
+              borderRadius: BorderRadius.all(Radius.circular(1)),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.orange.shade200,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: rastgeleRenk(), width: 4)),
+              child: ListTile(
+                leading: Icon(
+                  Icons.person,
+                  color: Colors.deepOrange,
+                  size: 50,
+                ),
+                title: Text( "Name",
+                    style: TextStyle(color: Colors.indigo,
+                      fontSize: 22,
+                    )),
+                subtitle: Text("Hasan Sancaktar",
+                  style: TextStyle(fontSize: 25,color: Colors.black),
+                ),
+              ),
+            )),
+        Container(margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10), padding: EdgeInsets.symmetric(vertical: 50,horizontal: 20),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.pink, width: 5),
+              borderRadius: BorderRadius.all(Radius.circular(1)),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.orange.shade200,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: rastgeleRenk(), width: 4)),
+              child: ListTile(
+                leading: Icon(
+                  Icons.code,
+                  size: 50,
+                  color: Colors.deepOrange,
+                ),
+                title: Text( "GitHub ",
+                    style: TextStyle(color: Colors.indigo,
+                      fontSize: 22,
+                    )),
+                subtitle: Text("/hasancaktar",
+                  style: TextStyle(fontSize: 25,color: Colors.black),
+                ),
+              ),
+            ))
+
+      ],),
     );
   }
 }
