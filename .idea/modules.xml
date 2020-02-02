@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/not_ortalama_hesaplama.iml" filepath="$PROJECT_DIR$/not_ortalama_hesaplama.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/not_ortalama_hesaplama_android.iml" filepath="$PROJECT_DIR$/android/not_ortalama_hesaplama_android.iml" />
+    </modules>
+  </component>
+</project>
